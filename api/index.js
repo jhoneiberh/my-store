@@ -6,15 +6,20 @@ const cors = require('cors');
 
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const allowedOrigins = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
     'http://localhost:4200',
     'http://localhost:5500',
     'http://127.0.0.1:5500',
 ];
 const options = {
     origin: (origin, callback) => {
+        if (!origin) {
+            return callback(null, true);
+        }
         if (allowedOrigins.includes(origin)) {
             callback(null, true); // si está en la lista, permitido
         } else {
@@ -52,8 +57,9 @@ const {
 
 routerApi(app);
 
-app.get('/', (request, response) => {
-    response.send('<h1>Hola express</h1>');
+app.get('/api', (request, response) => {
+    // response.send('<h1>Hola express</h1>');
+    response.json({ Hola: 'express' });
 });
 
 app.get('/new_route', (request, response) => {
