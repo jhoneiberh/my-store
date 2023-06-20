@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+    postgres:
+        image: postgres:14
+        container_name: db
+        environment:
+            - POSTGRES_DB=my-store
+            - POSTGRES_USER=nico
+            - POSTGRES_PASSWORD=123
+        ports:
+            - 5432:5432
+        volumes:
+            - /postgres_data:/var/lib/postgresql/data
+
+    pgadmin:
+        image: dpage/pgadmin4
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=admin@mail.com
+            - PGADMIN_DEFAULT_PASSWORD=admin
+        # Corre en el 5050 e internamente lo comunica con el 80 del contenedor
+        ports:
+            - 5050:80

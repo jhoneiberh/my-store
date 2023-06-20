@@ -1,5 +1,7 @@
 .editorconfig
 .eslintrc.json
+postgres_data
+.env
 
 # Logs
 logs
